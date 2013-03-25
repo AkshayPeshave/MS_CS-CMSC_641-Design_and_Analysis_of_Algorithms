@@ -10,16 +10,370 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       157,          7]
-NotebookDataLength[    362440,       6760]
-NotebookOptionsPosition[    360787,       6704]
-NotebookOutlinePosition[    361131,       6719]
-CellTagsIndexPosition[    361088,       6716]
+NotebookDataLength[    375233,       7143]
+NotebookOptionsPosition[    372586,       7062]
+NotebookOutlinePosition[    372930,       7077]
+CellTagsIndexPosition[    372887,       7074]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
 Notebook[{
 
 Cell[CellGroupData[{
+Cell["\<\
+Regression Models for Real-value predictors\
+\>", "Title",
+ CellChangeTimes->{{3.573213231261491*^9, 3.5732133087069206`*^9}}],
+
+Cell[CellGroupData[{
+
+Cell["\<\
+Regressions models are used for predicting real-valued outputs given a set of \
+input features. Regression can be modelled as a function of a k-th degree \
+polynomial of the input features. \
+\>", "ItemParagraph",
+ CellChangeTimes->{{3.5732133632470403`*^9, 3.573213369178379*^9}, {
+  3.5732138886990943`*^9, 3.5732139310555167`*^9}, {3.5732139734729433`*^9, 
+  3.573214024973889*^9}}],
+
+Cell["\<\
+When k=1, we have a regression model which assumes that the output is a \
+linear function of the given input feature-set. Similarly, when k=2, we have \
+a quadratic regression model and so on for increasing values of k.\
+\>", "ItemParagraph",
+ CellChangeTimes->{{3.5732133632470403`*^9, 3.573213369178379*^9}, {
+  3.5732138886990943`*^9, 3.5732139310555167`*^9}, {3.5732139734729433`*^9, 
+  3.5732141139389772`*^9}}],
+
+Cell["\<\
+The learning problem here is deriving the function, be it for any kth degree, \
+of the inputs. This function is representated as a weight wector w. This \
+vector consists of coefficients of the terms in the kth degree polynomial of \
+input features we are trying to model. The derivation of w for linear \
+regression given a training set consisting of input feature vectors Xi and \
+corresponding outputs yi is:\
+\>", "ItemParagraph",
+ CellChangeTimes->{{3.5732133632470403`*^9, 3.573213369178379*^9}, {
+  3.5732138886990943`*^9, 3.5732139310555167`*^9}, {3.5732139734729433`*^9, 
+  3.573214333194518*^9}, {3.5732156509628897`*^9, 3.573215666397773*^9}}],
+
+Cell[TextData[{
+ "X =",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"(", GridBox[{
+      {
+       SubscriptBox["X", "1"]},
+      {
+       SubscriptBox["X", "2"]},
+      {"."},
+      {"."},
+      {"."},
+      {
+       SubscriptBox["X", "R"]}
+     }], ")"}], TraditionalForm]],
+  FormatType->"TraditionalForm"],
+ "  = ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"(", GridBox[{
+      {
+       SubscriptBox["x", "11"], 
+       SubscriptBox["x", "12"], ".", ".", ".", 
+       SubscriptBox["x", 
+        RowBox[{"1", "m"}]]},
+      {
+       SubscriptBox["x", "21"], 
+       SubscriptBox["x", "22"], ".", ".", ".", 
+       SubscriptBox["x", 
+        RowBox[{"2", "m"}]]},
+      {".", ".", ".", ".", ".", "."},
+      {".", ".", ".", ".", ".", "."},
+      {".", ".", ".", ".", ".", "."},
+      {
+       SubscriptBox["x", "R1"], 
+       SubscriptBox["x", "R2"], ".", ".", ".", 
+       SubscriptBox["x", "Rm"]}
+     }], ")"}], TraditionalForm]],
+  FormatType->"TraditionalForm"],
+ "              and                Y = ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"(", GridBox[{
+      {
+       SubscriptBox["y", "1"]},
+      {
+       SubscriptBox["y", "2"]},
+      {"."},
+      {"."},
+      {"."},
+      {
+       SubscriptBox["y", "R"]}
+     }], ")"}], TraditionalForm]],
+  FormatType->"TraditionalForm"]
+}], "ItemParagraph",
+ CellChangeTimes->{{3.5732133632470403`*^9, 3.573213369178379*^9}, {
+  3.5732138886990943`*^9, 3.5732139310555167`*^9}, {3.5732139734729433`*^9, 
+  3.5732143331905174`*^9}, {3.573214372657775*^9, 3.5732144093718753`*^9}, {
+  3.5732144526513505`*^9, 3.573214781398154*^9}, {3.5732148448577833`*^9, 
+  3.5732151747776537`*^9}},
+ TextAlignment->Center],
+
+Cell["\<\
+The linear regression model assumes a vector w such that :\
+\>", "ItemParagraph",
+ CellChangeTimes->{{3.573215211763769*^9, 3.5732155006172905`*^9}, {
+  3.5732155350732613`*^9, 3.573215535078262*^9}}],
+
+Cell[TextData[{
+ "y = Out(x) =",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{" ", 
+    SuperscriptBox["w", "T"]}], TraditionalForm]],
+  FormatType->"TraditionalForm"],
+ ". x = ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["w", "1"], TraditionalForm]]],
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["x", "1"], TraditionalForm]],
+  FormatType->"TraditionalForm"],
+ " + ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["w", "2"], TraditionalForm]]],
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["x", "2"], TraditionalForm]]],
+ " + \[Ellipsis]. + ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["w", "m"], TraditionalForm]]],
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["x", "m"], TraditionalForm]]]
+}], "ItemParagraph",
+ CellChangeTimes->{{3.573215211763769*^9, 3.5732155006172905`*^9}, {
+  3.5732155350732613`*^9, 3.5732155375834055`*^9}}],
+
+Cell[TextData[{
+ "w = max. likelihood = ",
+ Cell[BoxData[
+  FormBox[
+   SuperscriptBox[
+    RowBox[{"(", 
+     RowBox[{
+      SuperscriptBox["X", "T"], "X"}], ")"}], 
+    RowBox[{"-", "1"}]], TraditionalForm]],
+  FormatType->"TraditionalForm"],
+ "(",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    SuperscriptBox["X", "T"], " "}], TraditionalForm]]],
+ "Y) "
+}], "ItemParagraph",
+ CellChangeTimes->{{3.573215211763769*^9, 3.5732155059265947`*^9}, {
+  3.5732155513131905`*^9, 3.5732155583505926`*^9}}],
+
+Cell["", "ItemParagraph",
+ CellChangeTimes->{{3.573215211763769*^9, 3.5732155059265947`*^9}, {
+  3.5732155513131905`*^9, 3.5732155594806576`*^9}, {3.5732156756253004`*^9, 
+  3.573215675629301*^9}}],
+
+Cell[TextData[{
+ "Z = ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"(", GridBox[{
+      {
+       SubscriptBox["x", "11"], 
+       SubscriptBox["x", "12"], "...", 
+       SubscriptBox["x", 
+        RowBox[{"1", "m"}]], 
+       SuperscriptBox[
+        SubscriptBox["x", "11"], "2"], 
+       SuperscriptBox[
+        SubscriptBox["x", "12"], "2"], "...", 
+       SuperscriptBox[
+        SubscriptBox["x", 
+         RowBox[{"1", "m"}]], "2"], 
+       RowBox[{
+        SubscriptBox["x", "11"], 
+        SubscriptBox["x", "12"]}], 
+       RowBox[{
+        SubscriptBox["x", "11"], 
+        SubscriptBox["x", "13"]}], "..."},
+      {
+       SubscriptBox["x", "21"], 
+       SubscriptBox["x", "22"], "...", 
+       SubscriptBox["x", 
+        RowBox[{"2", "m"}]], 
+       SuperscriptBox[
+        SubscriptBox["x", "11"], "2"], 
+       SuperscriptBox[
+        SubscriptBox["x", "12"], "2"], "...", 
+       SuperscriptBox[
+        SubscriptBox["x", 
+         RowBox[{"2", "m"}]], "2"], 
+       RowBox[{
+        SubscriptBox["x", "21"], 
+        SubscriptBox["x", "22"]}], 
+       RowBox[{
+        SubscriptBox["x", "21"], 
+        SubscriptBox["x", "23"]}], "..."},
+      {".", ".", "...", ".", ".", ".", "...", ".", ".", ".", "."},
+      {".", ".", "...", ".", ".", ".", "...", ".", ".", ".", "."},
+      {".", ".", "...", ".", ".", ".", "...", ".", ".", ".", "."},
+      {
+       SubscriptBox["x", "R1"], 
+       SubscriptBox["x", "R2"], "...", 
+       SubscriptBox["x", "Rm"], 
+       SuperscriptBox[
+        SubscriptBox["x", "R1"], "2"], 
+       SuperscriptBox[
+        SubscriptBox["x", "R2"], "2"], "...", 
+       SuperscriptBox[
+        SubscriptBox["x", "Rm"], "2"], 
+       RowBox[{
+        SubscriptBox["x", "R1"], 
+        SubscriptBox["x", "R2"]}], 
+       RowBox[{
+        SubscriptBox["x", "R1"], 
+        SubscriptBox["x", "R3"]}], "..."}
+     }], ")"}], TraditionalForm]],
+  FormatType->"TraditionalForm"],
+ "              and                Y = ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"(", GridBox[{
+      {
+       SubscriptBox["y", "1"]},
+      {
+       SubscriptBox["y", "2"]},
+      {"."},
+      {"."},
+      {"."},
+      {
+       SubscriptBox["y", "R"]}
+     }], ")"}], TraditionalForm]],
+  FormatType->"TraditionalForm"]
+}], "ItemParagraph",
+ CellChangeTimes->{{3.573215727317257*^9, 3.5732158809100423`*^9}, {
+  3.5732159188342113`*^9, 3.57321615256558*^9}}],
+
+Cell["\<\
+i.e. Z = {all products of powers of inputs in which sum of powers is q or \
+less}\
+\>", "ItemParagraph",
+ CellChangeTimes->{{3.573215727317257*^9, 3.5732158809100423`*^9}, {
+  3.5732159188342113`*^9, 3.573216199899287*^9}}],
+
+Cell["\<\
+w is calculated as show above by replacing X with Z.\
+\>", "ItemParagraph",
+ CellChangeTimes->{{3.573215727317257*^9, 3.5732158809100423`*^9}, {
+  3.5732159188342113`*^9, 3.5732162255367537`*^9}}],
+
+Cell["", "ItemParagraph",
+ CellChangeTimes->{{3.573215727317257*^9, 3.5732158809100423`*^9}, {
+  3.5732159188342113`*^9, 3.573216225534754*^9}}],
+
+Cell["\<\
+Through this tutorial we attempt to show :\
+\>", "ItemParagraph",
+ CellChangeTimes->{{3.573215211763769*^9, 3.5732155059265947`*^9}, {
+  3.5732155513131905`*^9, 3.5732155714633427`*^9}, {3.573216232067127*^9, 
+  3.5732162345872717`*^9}}],
+
+Cell[CellGroupData[{
+
+Cell["\<\
+1. How the w changes with increasing k\
+\>", "SubitemParagraph",
+ CellChangeTimes->{{3.573215211763769*^9, 3.5732155059265947`*^9}, {
+  3.5732155513131905`*^9, 3.5732155714633427`*^9}, {3.573216232067127*^9, 
+  3.5732162345842714`*^9}, {3.5732162969278374`*^9, 3.5732163244364104`*^9}}],
+
+Cell[TextData[{
+ "2. We plot a ",
+ Cell[BoxData[
+  FormBox[
+   SuperscriptBox["k", "th"], TraditionalForm]],
+  FormatType->"TraditionalForm"],
+ "-degree curve in x for each weight vector component ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["w", "i"], TraditionalForm]],
+  FormatType->"TraditionalForm"],
+ ", with ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["w", "i"], TraditionalForm]]],
+ " as the constant coefficient for the curve. When predicting the output, the \
+regression model will consider all vectors that are tangent to each of these \
+curves (plotted using ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["w", "i"], TraditionalForm]]],
+ ") at the corresponding input values ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["x", "i"], TraditionalForm]]],
+ ", aggregate them into one vector and the magnitude of this vector is the \
+predicted value for y."
+}], "SubitemParagraph",
+ CellChangeTimes->{{3.573215211763769*^9, 3.5732155059265947`*^9}, {
+  3.5732155513131905`*^9, 3.5732155714633427`*^9}, {3.573216232067127*^9, 
+  3.5732162345842714`*^9}, {3.5732162969278374`*^9, 3.573216664849881*^9}}],
+
+Cell["\<\
+3. We further show the change in mean error on a validation data set as k \
+changes.\
+\>", "SubitemParagraph",
+ CellChangeTimes->{{3.573215211763769*^9, 3.5732155059265947`*^9}, {
+  3.5732155513131905`*^9, 3.5732155714633427`*^9}, {3.573216232067127*^9, 
+  3.5732162345842714`*^9}, {3.5732162969278374`*^9, 3.5732166247225857`*^9}, {
+  3.5732166741644135`*^9, 3.5732167740221252`*^9}}],
+
+Cell[TextData[{
+ "4. We have also provided a linear regression model with a threshold-value ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["w", "0"], TraditionalForm]]],
+ " incorporated. This threshold aids as a counter to noise which may be \
+present in the data. We show how the orientation of the vectors as well as \
+the mean error changes due to this addition of ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["w", "0"], TraditionalForm]]],
+ "."
+}], "SubitemParagraph",
+ CellChangeTimes->{{3.573215211763769*^9, 3.5732155059265947`*^9}, {
+  3.5732155513131905`*^9, 3.5732155714633427`*^9}, {3.573216232067127*^9, 
+  3.5732162345842714`*^9}, {3.5732162969278374`*^9, 3.5732166247225857`*^9}, {
+  3.5732166741644135`*^9, 3.5732169423357525`*^9}, {3.5732169813939867`*^9, 
+  3.5732169814289885`*^9}}],
+
+Cell["\<\
+5. Lastly, beyond a certain k-value the model exhibits overfitting. i.e. it \
+tries to fit the trainind data so much that it\[CloseCurlyQuote]s accuracy \
+over unseen (test) data deteriorates. This phenomenon is show in the k=4 \
+model at the end of this tutorial. The mean error for this model can be seen \
+to have spiked up substantially providing evidence of this behavior.\
+\>", "SubitemParagraph",
+ CellChangeTimes->{{3.573215211763769*^9, 3.5732155059265947`*^9}, {
+  3.5732155513131905`*^9, 3.5732155714633427`*^9}, {3.573216232067127*^9, 
+  3.5732162345842714`*^9}, {3.5732162969278374`*^9, 3.5732166247225857`*^9}, {
+  3.5732166741644135`*^9, 3.5732169423357525`*^9}, {3.5732169813939867`*^9, 
+  3.573217106268129*^9}}]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
 Cell[BoxData[
  RowBox[{"\[IndentingNewLine]", 
   RowBox[{
@@ -60,7 +414,6 @@ Cell[BoxData[
        RowBox[{
         RowBox[{"Transpose", "[", "X", "]"}], " ", ".", " ", "Y"}], ")"}]}]}],
      ";"}], "\[IndentingNewLine]", "\[IndentingNewLine]", 
-   "\[IndentingNewLine]", "\[IndentingNewLine]", "\[IndentingNewLine]", 
    RowBox[{
     RowBox[{"predictedSeperator1", " ", "=", " ", 
      RowBox[{"Table", "[", 
@@ -120,8 +473,7 @@ Cell[BoxData[
          RowBox[{"[", "6", "]"}], "]"}], "*", "featureValue"}], ",", 
        RowBox[{"{", 
         RowBox[{"featureValue", ",", "90"}], "}"}]}], "]"}]}], ";"}], 
-   "\[IndentingNewLine]", "\[IndentingNewLine]", "\[IndentingNewLine]", 
-   "\[IndentingNewLine]", 
+   "\[IndentingNewLine]", "\[IndentingNewLine]", 
    RowBox[{
     RowBox[{"predictedMPG", " ", "=", " ", 
      RowBox[{"Table", "[", 
@@ -208,7 +560,7 @@ Cell[BoxData[
    3.5731768171010485`*^9}, {3.573176870336094*^9, 3.573176870528105*^9}, {
    3.5731769252972374`*^9, 3.5731769690277386`*^9}, {3.573176999578486*^9, 
    3.5731770439220223`*^9}, 3.573177319580789*^9, {3.5731773649413834`*^9, 
-   3.5731773691686254`*^9}}],
+   3.5731773691686254`*^9}, {3.5732139434592266`*^9, 3.5732139472014403`*^9}}],
 
 Cell[BoxData[
  RowBox[{"Linear", " ", "Multivariate", " ", "Regression"}]], "Output",
@@ -2747,9 +3099,12 @@ Cell[BoxData[
 
 Cell[CellGroupData[{
 
-Cell["Quadratic regression", "Subsection",
+Cell["\<\
+Multivariate Quadratic regression\
+\>", "Subsection",
  CellChangeTimes->{{3.573055665903146*^9, 3.5730556868333426`*^9}, {
-  3.573061462687703*^9, 3.573061464655815*^9}}],
+  3.573061462687703*^9, 3.573061464655815*^9}, {3.573216951472275*^9, 
+  3.573216961425844*^9}}],
 
 Cell[CellGroupData[{
 
@@ -3394,9 +3749,10 @@ Cell[BoxData[
 Cell[CellGroupData[{
 
 Cell["\<\
-3rd Degree Polynomial Regression Model\
+Multivariate 3rd Degree Polynomial Regression Model\
 \>", "Subsection",
- CellChangeTimes->{{3.573174463852451*^9, 3.573174478329279*^9}}],
+ CellChangeTimes->{{3.573174463852451*^9, 3.573174478329279*^9}, {
+  3.5732169669231586`*^9, 3.5732169671981745`*^9}}],
 
 Cell[CellGroupData[{
 
@@ -4506,9 +4862,10 @@ Cell[BoxData[
 Cell[CellGroupData[{
 
 Cell["\<\
-4th Degree Polynomial Regression Model\
+Multivariate 4th Degree Polynomial Regression Model\
 \>", "Subsection",
- CellChangeTimes->{{3.573175953219638*^9, 3.5731759631622066`*^9}}],
+ CellChangeTimes->{{3.573175953219638*^9, 3.5731759631622066`*^9}, {
+  3.5732169721014547`*^9, 3.573216972645486*^9}}],
 
 Cell[CellGroupData[{
 
@@ -6701,6 +7058,7 @@ Cell[BoxData[
   3.5731774173023787`*^9}]
 }, Open  ]]
 }, Open  ]]
+}, Open  ]]
 },
 WindowSize->{1350, 633},
 WindowMargins->{{0, Automatic}, {Automatic, 0}},
@@ -6719,47 +7077,72 @@ CellTagsIndex->{}
 (*NotebookFileOutline
 Notebook[{
 Cell[CellGroupData[{
-Cell[579, 22, 8277, 188, 646, "Input"],
-Cell[8859, 212, 430, 7, 31, "Output"],
-Cell[9292, 221, 65890, 1090, 228, "Output"],
-Cell[75185, 1313, 2551, 47, 227, "Output"],
-Cell[77739, 1362, 436, 7, 31, "Output"]
-}, Open  ]],
+Cell[579, 22, 136, 3, 90, "Title"],
 Cell[CellGroupData[{
-Cell[78212, 1374, 173, 2, 52, "Subsection"],
+Cell[740, 29, 395, 7, 21, "ItemParagraph"],
+Cell[1138, 38, 426, 7, 38, "ItemParagraph"],
+Cell[1567, 47, 664, 10, 55, "ItemParagraph"],
+Cell[2234, 59, 1648, 60, 117, "ItemParagraph"],
+Cell[3885, 121, 210, 4, 21, "ItemParagraph"],
+Cell[4098, 127, 814, 31, 23, "ItemParagraph"],
+Cell[4915, 160, 494, 18, 27, "ItemParagraph"],
+Cell[5412, 180, 197, 3, 21, "ItemParagraph"],
+Cell[5612, 185, 2365, 79, 129, "ItemParagraph"],
+Cell[7980, 266, 233, 5, 21, "ItemParagraph"],
+Cell[8216, 273, 206, 4, 21, "ItemParagraph"],
+Cell[8425, 279, 144, 2, 21, "ItemParagraph"],
+Cell[8572, 283, 247, 5, 21, "ItemParagraph"],
 Cell[CellGroupData[{
-Cell[78410, 1380, 7275, 203, 652, "Input"],
-Cell[85688, 1585, 698, 14, 31, "Output"],
-Cell[86389, 1601, 65445, 1083, 228, "Output"],
-Cell[151837, 2686, 2558, 47, 226, "Output"],
-Cell[154398, 2735, 454, 8, 31, "Output"]
+Cell[8844, 292, 296, 5, 21, "SubitemParagraph"],
+Cell[9143, 299, 1106, 30, 57, "SubitemParagraph"],
+Cell[10252, 331, 395, 7, 21, "SubitemParagraph"],
+Cell[10650, 340, 798, 17, 38, "SubitemParagraph"],
+Cell[11451, 359, 739, 11, 38, "SubitemParagraph"]
 }, Open  ]]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[154901, 2749, 159, 2, 43, "Subsection"],
+Cell[12239, 376, 8204, 186, 546, "Input"],
+Cell[20446, 564, 430, 7, 31, "Output"],
+Cell[20879, 573, 65890, 1090, 228, "Output"],
+Cell[86772, 1665, 2551, 47, 227, "Output"],
+Cell[89326, 1714, 436, 7, 31, "Output"]
+}, Open  ]],
 Cell[CellGroupData[{
-Cell[155085, 2755, 12789, 272, 972, "Input"],
-Cell[167877, 3029, 17218, 309, 230, "Output"],
-Cell[185098, 3340, 2285, 43, 226, "Output"],
-Cell[187386, 3385, 203, 4, 31, "Output"]
+Cell[89799, 1726, 173, 2, 52, "Subsection"],
+Cell[CellGroupData[{
+Cell[89997, 1732, 7275, 203, 652, "Input"],
+Cell[97275, 1937, 698, 14, 31, "Output"],
+Cell[97976, 1953, 65445, 1083, 228, "Output"],
+Cell[163424, 3038, 2558, 47, 226, "Output"],
+Cell[165985, 3087, 454, 8, 31, "Output"]
 }, Open  ]]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[187638, 3395, 134, 3, 43, "Subsection"],
+Cell[166488, 3101, 229, 5, 43, "Subsection"],
 Cell[CellGroupData[{
-Cell[187797, 3402, 8106, 221, 992, "Input"],
-Cell[195906, 3625, 46153, 829, 230, "Output"],
-Cell[242062, 4456, 2217, 41, 226, "Output"],
-Cell[244282, 4499, 157, 2, 31, "Output"]
+Cell[166742, 3110, 12789, 272, 972, "Input"],
+Cell[179534, 3384, 17218, 309, 230, "Output"],
+Cell[196755, 3695, 2285, 43, 226, "Output"],
+Cell[199043, 3740, 203, 4, 31, "Output"]
 }, Open  ]]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[244488, 4507, 136, 3, 43, "Subsection"],
+Cell[199295, 3750, 200, 4, 43, "Subsection"],
 Cell[CellGroupData[{
-Cell[244649, 4514, 7638, 214, 952, "Input"],
-Cell[252290, 4730, 105594, 1911, 223, "Output"],
-Cell[357887, 6643, 2684, 52, 227, "Output"],
-Cell[360574, 6697, 185, 3, 31, "Output"]
+Cell[199520, 3758, 8106, 221, 992, "Input"],
+Cell[207629, 3981, 46153, 829, 230, "Output"],
+Cell[253785, 4812, 2217, 41, 226, "Output"],
+Cell[256005, 4855, 157, 2, 31, "Output"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[256211, 4863, 200, 4, 43, "Subsection"],
+Cell[CellGroupData[{
+Cell[256436, 4871, 7638, 214, 952, "Input"],
+Cell[264077, 5087, 105594, 1911, 223, "Output"],
+Cell[369674, 7000, 2684, 52, 227, "Output"],
+Cell[372361, 7054, 185, 3, 31, "Output"]
+}, Open  ]]
 }, Open  ]]
 }, Open  ]]
 }

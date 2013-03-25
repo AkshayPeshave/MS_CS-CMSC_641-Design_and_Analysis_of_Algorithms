@@ -1,0 +1,335 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 9.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       157,          7]
+NotebookDataLength[     14082,        326]
+NotebookOptionsPosition[     13600,        306]
+NotebookOutlinePosition[     13947,        321]
+CellTagsIndexPosition[     13904,        318]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[TextData[{
+ StyleBox["Analyzing Growth of functions\n\n", "Title"],
+ StyleBox["This is a short tutorial on how-to leverage this tool \
+\[OpenCurlyDoubleQuote]Mathematica\[CloseCurlyDoubleQuote] to help \
+characterize  the asymptotic behavior  of functions. Please note that this is \
+not a fully-built or even fool-proof tool, its simply a proof of concept & a \
+teaching aid to help understand the growth of functions.\nAll we try to find \
+out is if 2 user-given functions are asymptotically larger or smaller than \
+the other. Finding the constants c and threshold n0 are out of the scope of \
+this tutorial, but one may extend this for the same purpose if needed.\n\nWe \
+already assume that the reader is familiar with the CLRS book, specifically \
+chapter 3, Growth of functions and is familiar with the O , o , \[Omega] and ",
+  FontSize->20],
+ "\[CapitalOmega]",
+ StyleBox[" notations and their definitions. In the next section, we shall \
+simply demonstrate how to use Limits to compare the 2 user given functions.\n\
+\nWhen a user runs this program, they have to input 2 functions they wish to \
+compare , and please input in \[OpenCurlyDoubleQuote]Mathematica\
+\[CloseCurlyDoubleQuote] readable format. In addition, we provide an \
+interactive continuous plot of both the functions for varying values of x.\n\n\
+Now we explain the logic of our code.\n",
+  FontSize->20],
+ StyleBox["\n", "Title"],
+ StyleBox["To check if f(x) \[Element] o(g(x)), or g(x) \[Element] \
+\[Omega](f(x)):",
+  FontSize->20,
+  FontColor->RGBColor[0, 0, 1]],
+ StyleBox["\n\t",
+  FontSize->20],
+ StyleBox["The strict bound o is much easier to determine than the more lax O \
+bound.\nWhat we ask \
+\[OpenCurlyDoubleQuote]Mathematica\[CloseCurlyDoubleQuote] to do is find us \
+the limit of the combined function, ",
+  FontSize->20,
+  FontColor->GrayLevel[0]],
+ StyleBox["\n\t\t",
+  FontSize->20,
+  FontSlant->"Italic",
+  FontColor->GrayLevel[0]],
+ StyleBox["f(x) / g(x) i.e. Limit[ f(x)/g(x) , x -> infinity]\n",
+  FontSize->20,
+  FontSlant->"Italic",
+  FontColor->RGBColor[0.6, 0.4, 0.2]],
+ StyleBox["\n",
+  FontSize->20,
+  FontColor->RGBColor[0.6, 0.4, 0.2]],
+ StyleBox["Once we have the limit, its a simple case of checking the \
+following conditions,\n1. ",
+  FontSize->20,
+  FontColor->GrayLevel[0]],
+ StyleBox["If the limit is zero, then f(x) is dominated by g(x) , so ",
+  FontSize->20],
+ StyleBox[" f(x) \[Element] o(g(x))",
+  FontSize->20,
+  FontColor->RGBColor[0, 0, 1]],
+ StyleBox["\n2. If the limit is infinity , then vice-versa infact.\n3. For a \
+discrete limit or a limit that is an interval or if the limit cannot be \
+evaluated, then we can\[CloseCurlyQuote]t make any decision.\n",
+  FontSize->20],
+ StyleBox["\n", "Subtitle",
+  FontFamily->"Arial",
+  FontSize->20],
+ StyleBox["To check if f(x) \[Element] O(g(x)):\n\t",
+  FontSize->20,
+  FontColor->RGBColor[0, 0, 1]],
+ StyleBox["The big-O bound is slightly more trickier to evaluate. Again, our \
+decision is based on the Limit we calculated in the previous section. The \
+conditions are,\n1. If the limit is a finite number, 0 including but infinity \
+excluded, then ",
+  FontSize->20,
+  FontColor->GrayLevel[0]],
+ StyleBox["f(x)\[Element]O(g(x)).\n2. If the limit is an Interval, and the \
+interval does not contain infinity, then f(x)\[Element]O(g(x))\n3. If limit \
+is infinity or is an interval containing infinity, then \
+f(x)\[NotElement]O(g(x))\n4. any other case, we can",
+  FontSize->20],
+ StyleBox["\[CloseCurlyQuote]",
+  FontSize->20,
+  FontColor->GrayLevel[0]],
+ StyleBox["t make any decision.", "Subtitle",
+  FontFamily->"Arial",
+  FontSize->20,
+  FontColor->GrayLevel[0]],
+ StyleBox["\n\n\n", "Subtitle",
+  FontSize->18]
+}], "Text",
+ CellChangeTimes->{{3.5731787822868295`*^9, 3.5731788455574484`*^9}, {
+   3.573178908271035*^9, 3.573178916675516*^9}, {3.573178947437276*^9, 
+   3.5731794825128803`*^9}, {3.573179523234209*^9, 3.573179672820765*^9}, {
+   3.5731797061756725`*^9, 3.573179748551097*^9}, {3.573179941870154*^9, 
+   3.5731799671275983`*^9}, {3.5731800181775184`*^9, 3.573180035580514*^9}, 
+   3.5731800771518917`*^9, {3.5731801747104716`*^9, 3.5731801877742186`*^9}, {
+   3.573180263061525*^9, 3.5731802670787544`*^9}, {3.5731804202445154`*^9, 
+   3.5731805924803667`*^9}, {3.5731806330406866`*^9, 
+   3.5731806518277607`*^9}, {3.573180704352765*^9, 3.573180712776247*^9}, {
+   3.5731810540027637`*^9, 3.5731811861543226`*^9}, {3.57318121687208*^9, 
+   3.573181257371396*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{"f", "[", "x_", "]"}], "=", 
+   RowBox[{"Input", "[", "\"\<f(x)=\>\"", "]"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"g", "[", "x_", "]"}], "=", 
+   RowBox[{"Input", "[", "\"\<g(x)=\>\"", "]"}]}], ";"}], "\n", 
+ RowBox[{"Manipulate", "[", 
+  RowBox[{
+   RowBox[{"Plot", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"f", "[", "x", "]"}], ",", 
+       RowBox[{"g", "[", "x", "]"}]}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"x", ",", "a", ",", "b"}], "}"}], ",", 
+     RowBox[{"PlotLegends", "\[Rule]", "\"\<Expressions\>\""}], ",", 
+     RowBox[{"Filling", "\[Rule]", 
+      RowBox[{"{", 
+       RowBox[{"1", "\[Rule]", 
+        RowBox[{"{", "2", "}"}]}], "}"}]}]}], "]"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"a", ",", "0", ",", "20"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"b", ",", "2", ",", "20"}], "}"}]}], "]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"decision", " ", "=", " ", 
+    RowBox[{"Limit", "[", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"f", "[", "x", "]"}], "/", 
+       RowBox[{"g", "[", "x", "]"}]}], ",", 
+      RowBox[{"x", "\[Rule]", "\[Infinity]"}]}], "]"}]}], ";"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"a", " ", "=", " ", 
+   RowBox[{"Min", "[", "decision", "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"b", " ", "=", " ", 
+   RowBox[{"Max", "[", "decision", "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"a1", " ", "=", " ", 
+   RowBox[{"Abs", "[", "a", "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"b1", " ", "=", " ", 
+   RowBox[{"Abs", "[", "b", "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"decision1", " ", "=", " ", 
+   RowBox[{"If", "[", 
+    RowBox[{
+     RowBox[{"a1", ">", "b1"}], " ", ",", " ", "a1", " ", ",", " ", "b1"}], 
+    "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"If", "[", 
+   RowBox[{
+    RowBox[{"a", " ", "\[Equal]", " ", "b"}], " ", ",", "\[IndentingNewLine]", 
+    RowBox[{"If", "[", 
+     RowBox[{
+      RowBox[{"decision", "  ", "\[Equal]", " ", "0"}], ",", 
+      "\[IndentingNewLine]", "\"\< we find that f(x) \[Element] o(g(x)) \>\"",
+       ",", "\[IndentingNewLine]", 
+      RowBox[{"If", "[", 
+       RowBox[{
+        RowBox[{"decision", "  ", "\[Equal]", " ", "\[Infinity]"}], ",", 
+        "\[IndentingNewLine]", 
+        "\"\< we find that g(x) \[Element] \[Omega](f(x)) \>\"", ",", 
+        "\[IndentingNewLine]", 
+        "\"\< Can't make a general statement regarding o & \[Omega] between \
+f(x) and g(x)\>\""}], "\[IndentingNewLine]", "]"}]}], "\[IndentingNewLine]", 
+     "]"}], " ", "\[IndentingNewLine]", ",", " ", 
+    "\"\<Limit is an interval, Can't make a general statement regarding o & \
+\[Omega] between f(x) and g(x)\>\""}], "\[IndentingNewLine]", "]"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{"If", "[", 
+  RowBox[{
+   RowBox[{"a", " ", "\[Equal]", " ", "b"}], " ", ",", "\[IndentingNewLine]", 
+   RowBox[{"If", "[", 
+    RowBox[{
+     RowBox[{"decision", "  ", "\[Equal]", " ", "0"}], ",", 
+     "\[IndentingNewLine]", "\"\< we find that f(x) \[Element] O(g(x)) \>\"", 
+     ",", "\[IndentingNewLine]", 
+     RowBox[{"If", "[", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"Abs", "[", "decision", "]"}], "  ", "\[Equal]", " ", 
+        "\[Infinity]"}], ",", "\[IndentingNewLine]", 
+       "\"\< we find that g(x) \[Element] \[CapitalOmega](f(x)) \>\"", ",", 
+       "\[IndentingNewLine]", 
+       "\"\< Can't make a general statement regarding o & \[Omega] between \
+f(x) and g(x)\>\""}], "\[IndentingNewLine]", "]"}]}], "\[IndentingNewLine]", 
+    "]"}], "\[IndentingNewLine]", ",", "\[IndentingNewLine]", " ", 
+   RowBox[{"If", "[", " ", 
+    RowBox[{
+     RowBox[{"decision1", " ", "<", " ", "\[Infinity]"}], " ", ",", " ", 
+     "\"\< we find that f(x) \[Element] O(g(x)) \>\"", " ", ",", " ", 
+     "\"\<Can't make a general statement regarding o & \[Omega] between f(x) \
+and g(x)\>\""}], "]"}]}], "\[IndentingNewLine]", 
+  "]"}], "\[IndentingNewLine]"}], "Input",
+ CellChangeTimes->{{3.573168692757741*^9, 3.5731687261096487`*^9}, 
+   3.573168817373869*^9, {3.5731688779083314`*^9, 3.5731688980884857`*^9}, {
+   3.57316902719387*^9, 3.5731690582486463`*^9}, {3.57316911880011*^9, 
+   3.573169218378805*^9}, {3.5731759709070272`*^9, 3.5731760770731*^9}, {
+   3.573176226240632*^9, 3.5731762978727293`*^9}, {3.5731763392830973`*^9, 
+   3.5731763550369987`*^9}, {3.573176792806038*^9, 3.5731767966612577`*^9}, 
+   3.5731768359625063`*^9, {3.573176881853131*^9, 3.5731768858323584`*^9}, {
+   3.573177276110681*^9, 3.5731772768517237`*^9}, {3.573177327281608*^9, 
+   3.573177367474907*^9}, {3.5731774704037943`*^9, 3.5731775904216585`*^9}, {
+   3.5731777959974165`*^9, 3.5731778341986017`*^9}, {3.573177900496394*^9, 
+   3.573177903487565*^9}, {3.5731780258355627`*^9, 3.5731780741253247`*^9}, {
+   3.5731781734400053`*^9, 3.5731782050438128`*^9}, {3.573178354708373*^9, 
+   3.573178371631341*^9}, {3.573180204423171*^9, 3.573180212046607*^9}, {
+   3.5731802421283274`*^9, 3.57318025580811*^9}}],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`a$$ = 0, $CellContext`b$$ = 2., 
+    Typeset`show$$ = True, Typeset`bookmarkList$$ = {}, 
+    Typeset`bookmarkMode$$ = "Menu", Typeset`animator$$, Typeset`animvar$$ = 
+    1, Typeset`name$$ = "\"untitled\"", Typeset`specs$$ = {{
+      Hold[$CellContext`a$$], 0, 20}, {
+      Hold[$CellContext`b$$], 2, 20}}, Typeset`size$$ = {430., {115., 119.}}, 
+    Typeset`update$$ = 0, Typeset`initDone$$, Typeset`skipInitDone$$ = 
+    True, $CellContext`a$13678$$ = 0, $CellContext`b$13679$$ = 0}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, 
+      "Variables" :> {$CellContext`a$$ = 0, $CellContext`b$$ = 2}, 
+      "ControllerVariables" :> {
+        Hold[$CellContext`a$$, $CellContext`a$13678$$, 0], 
+        Hold[$CellContext`b$$, $CellContext`b$13679$$, 0]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, "Body" :> Plot[{
+         $CellContext`f[$CellContext`x], 
+         $CellContext`g[$CellContext`x]}, {$CellContext`x, $CellContext`a$$, \
+$CellContext`b$$}, PlotLegends -> "Expressions", Filling -> {1 -> {2}}], 
+      "Specifications" :> {{$CellContext`a$$, 0, 20}, {$CellContext`b$$, 2, 
+         20}}, "Options" :> {}, "DefaultOptions" :> {}],
+     ImageSizeCache->{477., {179., 184.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    SynchronousInitialization->True,
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellChangeTimes->{
+  3.573168695684909*^9, 3.5731688310906534`*^9, 3.5731688670867124`*^9, 
+   3.573168923043913*^9, {3.573169068001204*^9, 3.5731690856862154`*^9}, {
+   3.573176318102886*^9, 3.573176362965452*^9}, 3.573177373574256*^9, 
+   3.5731778779191027`*^9, {3.573178082009776*^9, 3.5731780958205657`*^9}, 
+   3.5731782128672605`*^9, {3.573178378220718*^9, 3.5731783883943*^9}, 
+   3.5731801192512994`*^9, 3.573181205128408*^9}],
+
+Cell[BoxData["\<\" we find that g(x) \[Element] \[Omega](f(x)) \"\>"], \
+"Output",
+ CellChangeTimes->{
+  3.573168695684909*^9, 3.5731688310906534`*^9, 3.5731688670867124`*^9, 
+   3.573168923043913*^9, {3.573169068001204*^9, 3.5731690856862154`*^9}, {
+   3.573176318102886*^9, 3.573176362965452*^9}, 3.573177373574256*^9, 
+   3.5731778779191027`*^9, {3.573178082009776*^9, 3.5731780958205657`*^9}, 
+   3.5731782128672605`*^9, {3.573178378220718*^9, 3.5731783883943*^9}, 
+   3.5731801192512994`*^9, 3.5731812052804165`*^9}],
+
+Cell[BoxData["\<\" we find that g(x) \[Element] \[CapitalOmega](f(x)) \"\>"], \
+"Output",
+ CellChangeTimes->{
+  3.573168695684909*^9, 3.5731688310906534`*^9, 3.5731688670867124`*^9, 
+   3.573168923043913*^9, {3.573169068001204*^9, 3.5731690856862154`*^9}, {
+   3.573176318102886*^9, 3.573176362965452*^9}, 3.573177373574256*^9, 
+   3.5731778779191027`*^9, {3.573178082009776*^9, 3.5731780958205657`*^9}, 
+   3.5731782128672605`*^9, {3.573178378220718*^9, 3.5731783883943*^9}, 
+   3.5731801192512994`*^9, 3.573181205282417*^9}]
+}, Open  ]],
+
+Cell[BoxData[""], "Input",
+ CellChangeTimes->{{3.573176333835786*^9, 3.5731763352288656`*^9}}]
+},
+WindowSize->{943, 955},
+WindowMargins->{{Automatic, 115}, {Automatic, -13}},
+FrontEndVersion->"9.0 for Microsoft Windows (64-bit) (November 20, 2012)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[557, 20, 4461, 96, 1155, "Text"],
+Cell[CellGroupData[{
+Cell[5043, 120, 5123, 115, 712, "Input"],
+Cell[10169, 237, 2265, 43, 380, "Output"],
+Cell[12437, 282, 521, 8, 31, "Output"],
+Cell[12961, 292, 526, 8, 31, "Output"]
+}, Open  ]],
+Cell[13502, 303, 94, 1, 31, "Input"]
+}
+]
+*)
+
+(* End of internal cache information *)
